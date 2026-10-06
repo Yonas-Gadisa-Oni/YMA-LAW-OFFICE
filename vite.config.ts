@@ -22,7 +22,7 @@ export default defineConfig({
     host: true,
     allowedHosts: true,
     proxy: {
-      "/api": "http://localhost:3001",
+      "/api": `http://localhost:${process.env.BLOG_API_PORT || 3001}`,
     },
   },
 

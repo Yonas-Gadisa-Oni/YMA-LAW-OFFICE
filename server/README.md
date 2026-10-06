@@ -1,7 +1,9 @@
 # Blog server
 
 Run `npm run dev` from the project root to start Vite and the API together.
-The API listens on port 3001; Vite forwards `/api` requests to it.
+The API uses port 3001 when available, then tries the next available ports;
+Vite forwards `/api` requests to the selected API port. Vite uses port 3000
+when available and selects another port if needed.
 
 Copy `.env.example` to `.env` and set `BLOG_ADMIN_PASSWORD` to the private
 admin password. `BLOG_ADMIN_EMAIL` defaults to `ymalawoffice@blog.com`.

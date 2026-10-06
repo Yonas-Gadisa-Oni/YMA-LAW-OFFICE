@@ -1,21 +1,13 @@
 [
   {
-    "id": "c36f0012-01d1-4d13-b7d6-42827ed7c7d5",
-    "slug": "hello-e31939c8",
-    "title": "hello",
-    "subtitle": "he",
-    "content": "i want this thing",
-    "imageUrl": "https://en.wikipedia.org/wiki/Law",
-    "createdAt": "2026-10-06T08:51:54.934Z"
-  },
-  {
     "id": "1e0dc0d8-a3b4-4296-9d4a-eb9547e6ea2b",
     "slug": "hello-6fb4766e",
     "title": "hello",
-    "subtitle": "hi",
+    "subtitle": "this is for check",
     "content": "i want to show you the real power of my work",
     "imageUrl": "/api/blog-images/096308cf-6cb1-485d-a7a9-a941f2fdd0e2.jpg",
-    "createdAt": "2026-10-06T09:02:23.404Z"
+    "createdAt": "2026-10-06T09:02:23.404Z",
+    "updatedAt": "2026-10-06T11:37:23.087Z"
   },
   {
     "id": "90affc47-61ef-4a29-af4f-16a304349af8",
