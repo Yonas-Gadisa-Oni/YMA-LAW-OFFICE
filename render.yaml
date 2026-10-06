@@ -2,7 +2,7 @@ services:
   - type: web
     name: yma-law-office
     runtime: node
-    plan: starter
+    plan: free
     region: frankfurt
     buildCommand: npm install && npm run build
     startCommand: npm start
