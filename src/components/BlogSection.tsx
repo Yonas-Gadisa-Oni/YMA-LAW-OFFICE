@@ -14,6 +14,16 @@ import {
 
 const API_BASE_URL = "https://yma-law-blog-api.onrender.com";
 
+
+function getImageUrl(imageUrl: string) {
+  if (/^(https?:|blob:|data:)/i.test(imageUrl)) {
+    return imageUrl;
+  }
+
+  return `${API_BASE_URL}${imageUrl.startsWith("/") ? "" : "/"}${imageUrl}`;
+}
+
+
 interface BlogPost {
   id: string;
   slug: string;
@@ -544,7 +554,7 @@ export default function BlogSection({ route, onNav }: BlogSectionProps) {
 
                 {imagePreview && (
                   <img
-                    src={imagePreview}
+                    src={getImageUrl(imagePreview)}
                     alt="Selected blog image preview"
                     className="max-h-72 w-full rounded-lg border border-slate-200 object-cover"
                   />
@@ -631,7 +641,7 @@ export default function BlogSection({ route, onNav }: BlogSectionProps) {
                   </p>
 
                   <img
-                    src={selectedPost.imageUrl}
+                    src={getImageUrl(selectedPost.imageUrl)}
                     alt=""
                     className="mt-8 max-h-[520px] w-full rounded-xl object-cover shadow-sm"
                   />
@@ -705,7 +715,7 @@ export default function BlogSection({ route, onNav }: BlogSectionProps) {
                     >
                       <div className="relative aspect-[1.85/1] overflow-hidden">
                         <img
-                          src={post.imageUrl}
+                          src={getImageUrl(post.imageUrl)}
                           alt=""
                           loading="lazy"
                           className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]"
