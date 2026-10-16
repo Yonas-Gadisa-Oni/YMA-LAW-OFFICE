@@ -117,7 +117,7 @@ export default function AboutAndFounder() {
         >
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-4">Why Clients Choose {BRAND_NAME}</h2>
-            <p className="text-slate-400 max-w-2xl mx-auto">Six pillars that set us apart from every other law office in Ethiopia.</p>
+            <p className="text-slate-400 max-w-2xl mx-auto">We are Zealous legal advocates, Backed by multidisciplinary Excellence for national & International clients. Our lawyers are not only legal professionals’ rather versed experts with practical experience in human resource, corporate compliance and Tax auditing.  We are the leading law office in sport and anti –doping litigation with national and International experience .   </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {WHY_US.map((item, i) => (
