@@ -46,6 +46,7 @@ export interface Testimonial {
   fullStory: string;
   category: string;
   headline?: string;
+  title?: string;
   role?: string;
 }
 

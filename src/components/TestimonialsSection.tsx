@@ -120,6 +120,11 @@ export default function TestimonialsSection() {
                   {/* Quote & Story */}
                   <div className="md:col-span-3">
                     <Quotes className="w-8 h-8 text-amber-400/40 mb-4" weight="fill" />
+                    {(current?.title || current?.headline) && (
+                      <h4 className="font-serif text-xl md:text-2xl font-bold text-amber-400 mb-4">
+                        {current.title || current.headline}
+                      </h4>
+                    )}
                     <blockquote className="text-white text-lg md:text-xl leading-relaxed mb-6 italic">
                       &ldquo;{current?.quote}&rdquo;
                     </blockquote>
