@@ -17,38 +17,67 @@ import ConsultModal from "./components/ConsultationModal";
 import ErrorBoundary from "./components/ErrorBoundary";
 import BlogSection from "./components/BlogSection";
 import { TELEGRAM_LINK, WHATSAPP_LINK } from "@/constants";
+import { useSEO } from "@/hooks/useSEO";
 
-function getPageFromHash() {
-  const hash = window.location.hash.replace("#", "");
-  return hash || "home";
+function getRouteFromLocation(): string {
+  // 1. Check pathname first (clean URL)
+  const path = window.location.pathname.replace(/^\/|\/$/g, "");
+  if (path && path !== "index.html") {
+    if (path === "newsletter") return "legal-updates";
+    return path;
+  }
+
+  // 2. Check hash fallback (legacy bookmarks / fragment links)
+  const hash = window.location.hash.replace(/^#\/?/, "");
+  if (hash) {
+    if (hash === "newsletter") return "legal-updates";
+    return hash;
+  }
+
+  return "home";
+}
+
+function getPathFromId(id: string): string {
+  if (id === "home") return "/";
+  if (id === "newsletter" || id === "legal-updates") return "/legal-updates";
+  return `/${id}`;
 }
 
 function App() {
-  const [activeTab, setActiveTab] = useState(getPageFromHash);
+  const [activeTab, setActiveTab] = useState(getRouteFromLocation);
   const [consultOpen, setConsultOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
+  // Dynamic SEO metadata updates
+  useSEO(activeTab);
+
   useEffect(() => {
-    const onHash = () => setActiveTab(getPageFromHash());
+    const onLocationChange = () => {
+      setActiveTab(getRouteFromLocation());
+    };
     const onScroll = () => setShowScrollTop(window.scrollY > 550);
-    window.addEventListener("hashchange", onHash);
+
+    window.addEventListener("popstate", onLocationChange);
+    window.addEventListener("hashchange", onLocationChange);
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
+
     return () => {
-      window.removeEventListener("hashchange", onHash);
+      window.removeEventListener("popstate", onLocationChange);
+      window.removeEventListener("hashchange", onLocationChange);
       window.removeEventListener("scroll", onScroll);
     };
   }, []);
 
   const navigate = (id: string) => {
-    if (id === "home") {
-      window.history.pushState({}, "", window.location.pathname);
-      setActiveTab("home");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      return;
+    const cleanId = id === "newsletter" ? "legal-updates" : id;
+    const targetPath = getPathFromId(cleanId);
+
+    if (window.location.pathname !== targetPath && window.location.pathname !== targetPath + "/") {
+      window.history.pushState({}, "", targetPath);
     }
-    window.location.hash = id;
-    setActiveTab(id);
+
+    setActiveTab(cleanId);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -62,6 +91,7 @@ function App() {
         return <PracticeAreasSection />;
       case "engagements":
         return <EngagementsSection onNav={navigate} />;
+      case "legal-updates":
       case "newsletter":
         return <NewsletterSection />;
       case "blog":

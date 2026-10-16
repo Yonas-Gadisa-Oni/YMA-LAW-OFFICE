@@ -21,14 +21,14 @@ interface NavbarProps {
 }
 
 const links = [
-  { id: "home", label: "Home" },
-  { id: "about", label: "About Us" },
-  { id: "team", label: "Our Team" },
-  { id: "practice-areas", label: "Practice Areas" },
-  { id: "engagements", label: "Engagements" },
-  { id: "newsletter", label: "Legal Updates" },
-  { id: "blog", label: "Blog" },
-  { id: "contact", label: "Contact Us" },
+  { id: "home", label: "Home", path: "/" },
+  { id: "about", label: "About Us", path: "/about" },
+  { id: "team", label: "Our Team", path: "/team" },
+  { id: "practice-areas", label: "Practice Areas", path: "/practice-areas" },
+  { id: "engagements", label: "Engagements", path: "/engagements" },
+  { id: "legal-updates", label: "Legal Updates", path: "/legal-updates" },
+  { id: "blog", label: "Blog", path: "/blog" },
+  { id: "contact", label: "Contact Us", path: "/contact" },
 ];
 
 export default function Navbar({ activeTab, onNav }: NavbarProps) {
@@ -48,6 +48,14 @@ export default function Navbar({ activeTab, onNav }: NavbarProps) {
     onNav(id);
     setMobileOpen(false);
     setFeeOpen(false);
+  };
+
+  const isLinkActive = (id: string) => {
+    return (
+      activeTab === id ||
+      (id === "legal-updates" && (activeTab === "newsletter" || activeTab === "legal-updates")) ||
+      (id === "blog" && activeTab.startsWith("blog"))
+    );
   };
 
   return (
@@ -74,22 +82,39 @@ export default function Navbar({ activeTab, onNav }: NavbarProps) {
 
       <nav className={`bg-white transition-all duration-300 ${scrolled ? "shadow-md" : "shadow-sm"}`}>
         <div className="mx-auto flex h-[78px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <button onClick={() => navigate("home")} className="flex shrink-0 items-center gap-3" aria-label={`${BRAND_SHORT} home`}>
+          <a
+            href="/"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("home");
+            }}
+            className="flex shrink-0 items-center gap-3"
+            aria-label={`${BRAND_SHORT} home`}
+          >
             <img src={LOGO_URL} alt={BRAND_SHORT} className="h-11 w-11 rounded-full object-cover sm:h-12 sm:w-12" />
             <span className="whitespace-nowrap text-base font-bold text-[#081b2d] sm:text-lg">YMA Law Office</span>
-          </button>
+          </a>
 
           <div className="hidden items-center gap-0.5 lg:flex">
-            {links.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => navigate(link.id)}
-                className={`relative px-3 py-3 text-[15px] font-semibold text-[#0f172a] transition hover:text-[#1d4ed8] ${activeTab === link.id || (link.id === "blog" && activeTab.startsWith("blog")) ? "text-[#1d4ed8]" : ""}`}
-              >
-                {link.label}
-                {(activeTab === link.id || (link.id === "blog" && activeTab.startsWith("blog"))) && <span className="absolute inset-x-3 bottom-0 h-0.5 bg-[#1d4ed8]" />}
-              </button>
-            ))}
+            {links.map((link) => {
+              const active = isLinkActive(link.id);
+              return (
+                <a
+                  key={link.id}
+                  href={link.path}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate(link.id);
+                  }}
+                  className={`relative px-3 py-3 text-[15px] font-semibold text-[#0f172a] transition hover:text-[#1d4ed8] ${
+                    active ? "text-[#1d4ed8]" : ""
+                  }`}
+                >
+                  {link.label}
+                  {active && <span className="absolute inset-x-3 bottom-0 h-0.5 bg-[#1d4ed8]" />}
+                </a>
+              );
+            })}
 
             <div className="relative">
               <button
@@ -107,9 +132,17 @@ export default function Navbar({ activeTab, onNav }: NavbarProps) {
                     className="absolute right-0 top-full mt-1 w-64 rounded-md border border-slate-200 bg-white p-2 shadow-xl"
                   >
                     {["Our Fee Structure", "Court Fee Calculator", "Arbitration Fee Calculator", "Interest Calculator", "VAT Calculator"].map((label) => (
-                      <button key={label} onClick={() => navigate("fee-structure")} className="block w-full rounded px-3 py-2.5 text-left text-sm font-medium text-slate-700 hover:bg-blue-50 hover:text-[#1d4ed8]">
+                      <a
+                        key={label}
+                        href="/fee-structure"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          navigate("fee-structure");
+                        }}
+                        className="block w-full rounded px-3 py-2.5 text-left text-sm font-medium text-slate-700 hover:bg-blue-50 hover:text-[#1d4ed8]"
+                      >
                         {label}
-                      </button>
+                      </a>
                     ))}
                   </motion.div>
                 )}
@@ -131,10 +164,18 @@ export default function Navbar({ activeTab, onNav }: NavbarProps) {
         {mobileOpen && (
           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden border-t border-slate-200 bg-white shadow-lg lg:hidden">
             <div className="mx-auto max-w-7xl px-4 py-3">
-              {[...links, { id: "fee-structure", label: "Fee Structure" }].map((link) => (
-                <button key={link.id} onClick={() => navigate(link.id)} className="block w-full border-b border-slate-100 px-2 py-3 text-left text-sm font-semibold text-[#0f172a] last:border-0">
+              {[...links, { id: "fee-structure", label: "Fee Structure", path: "/fee-structure" }].map((link) => (
+                <a
+                  key={link.id}
+                  href={link.path}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate(link.id);
+                  }}
+                  className="block w-full border-b border-slate-100 px-2 py-3 text-left text-sm font-semibold text-[#0f172a] last:border-0"
+                >
                   {link.label}
-                </button>
+                </a>
               ))}
               <button onClick={() => { setSearchOpen(true); setMobileOpen(false); }} className="flex w-full items-center gap-2 px-2 py-3 text-left text-sm font-semibold text-[#2b3d52]"><MagnifyingGlass size={18} /> Search</button>
             </div>

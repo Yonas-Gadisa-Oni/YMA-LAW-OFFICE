@@ -22,7 +22,13 @@ export default defineConfig({
     host: true,
     allowedHosts: true,
     proxy: {
-      "/api": `http://localhost:${process.env.BLOG_API_PORT || 3001}`,
+      "/api": {
+        target: process.env.BLOG_API_PORT
+          ? `http://localhost:${process.env.BLOG_API_PORT}`
+          : "https://yma-law-blog-api.onrender.com",
+        changeOrigin: true,
+        secure: true,
+      },
     },
   },
 
@@ -30,6 +36,15 @@ export default defineConfig({
     port: 3000,
     host: true,
     allowedHosts: true,
+    proxy: {
+      "/api": {
+        target: process.env.BLOG_API_PORT
+          ? `http://localhost:${process.env.BLOG_API_PORT}`
+          : "https://yma-law-blog-api.onrender.com",
+        changeOrigin: true,
+        secure: true,
+      },
+    },
   },
 
   resolve: {

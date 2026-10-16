@@ -27,7 +27,20 @@ export default function PracticeAreas() {
           })}
         </div>
 
-        <div className="mt-10 text-center"><button onClick={() => window.location.hash = "#practice-areas"} className="rounded-md bg-[#1d4ed8] px-7 py-3.5 text-[15px] font-bold text-white shadow-sm transition hover:bg-[#173fb1]">View all Legal Services</button></div>
+        <div className="mt-10 text-center">
+          <a
+            href="/practice-areas"
+            onClick={(e) => {
+              e.preventDefault();
+              window.history.pushState({}, "", "/practice-areas");
+              window.dispatchEvent(new PopStateEvent("popstate"));
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+            className="inline-block rounded-md bg-[#1d4ed8] px-7 py-3.5 text-[15px] font-bold text-white shadow-sm transition hover:bg-[#173fb1]"
+          >
+            View all Legal Services
+          </a>
+        </div>
       </div>
     </section>
   );

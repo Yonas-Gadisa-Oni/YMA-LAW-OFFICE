@@ -2,7 +2,17 @@ import { Envelope, MapPin, Phone, WhatsappLogo, Clock, MapTrifold } from "@phosp
 import { BRAND_NAME, BRAND_SHORT, CONTACT_EMAIL_ALT, CONTACT_PHONE, OFFICE_ADDRESS, WHATSAPP_LINK } from "@/constants";
 
 export default function SiteFooter({ onNav }: { onNav: (id: string) => void }) {
-  const links = ["home", "about", "team", "practice-areas", "engagements", "newsletter", "blog", "fee-structure", "contact"];
+  const links = [
+    { id: "home", label: "Home", path: "/" },
+    { id: "about", label: "About Us", path: "/about" },
+    { id: "team", label: "Our Team", path: "/team" },
+    { id: "practice-areas", label: "Practice Areas", path: "/practice-areas" },
+    { id: "engagements", label: "Engagements", path: "/engagements" },
+    { id: "legal-updates", label: "Legal Updates", path: "/legal-updates" },
+    { id: "blog", label: "Blog", path: "/blog" },
+    { id: "fee-structure", label: "Fee Structure", path: "/fee-structure" },
+    { id: "contact", label: "Contact Us", path: "/contact" },
+  ];
   return (
     <footer className="bg-[#192936] text-white">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
@@ -10,11 +20,34 @@ export default function SiteFooter({ onNav }: { onNav: (id: string) => void }) {
           <div>
             <h3 className="font-serif text-xl font-bold">About Our Law Office</h3><div className="mt-2 h-0.5 w-9 bg-[#1d4ed8]" />
             <p className="mt-6 max-w-lg text-[15px] leading-7 text-slate-300">{BRAND_NAME} provides trusted legal counsel across corporate, commercial, investment, litigation, and regulatory matters. We combine practical advice with committed advocacy for every client.</p>
-            <button onClick={() => onNav("about")} className="mt-6 text-sm font-medium text-[#60a5fa] hover:text-white">Learn more about us →</button>
+            <a
+              href="/about"
+              onClick={(e) => {
+                e.preventDefault();
+                onNav("about");
+              }}
+              className="mt-6 inline-block text-sm font-medium text-[#60a5fa] hover:text-white"
+            >
+              Learn more about us →
+            </a>
           </div>
           <div>
             <h3 className="font-serif text-xl font-bold">Quick Links</h3><div className="mt-2 h-0.5 w-9 bg-[#1d4ed8]" />
-            <div className="mt-5 space-y-3 text-[15px] text-slate-300">{links.map((id) => <button key={id} onClick={() => onNav(id)} className="block capitalize hover:text-white">{id.replace("-", " ")}</button>)}</div>
+            <div className="mt-5 space-y-3 text-[15px] text-slate-300">
+              {links.map((link) => (
+                <a
+                  key={link.id}
+                  href={link.path}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNav(link.id);
+                  }}
+                  className="block hover:text-white"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
           </div>
           <div>
             <h3 className="font-serif text-xl font-bold">Contact Our Office</h3><div className="mt-2 h-0.5 w-9 bg-[#1d4ed8]" />

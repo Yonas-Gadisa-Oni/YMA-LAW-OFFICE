@@ -12,7 +12,9 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
-const API_BASE_URL = "https://yma-law-blog-api.onrender.com";
+const API_BASE_URL = import.meta.env.DEV
+  ? ""
+  : "https://yma-law-blog-api.onrender.com";
 
 
 function getImageUrl(imageUrl: string) {
@@ -709,8 +711,12 @@ export default function BlogSection({ route, onNav }: BlogSectionProps) {
                     key={post.id}
                     className="group overflow-hidden rounded-lg bg-[#192936] text-left shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
                   >
-                    <button
-                      onClick={() => onNav(`blog/${post.slug}`)}
+                    <a
+                      href={`/blog/${post.slug}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        onNav(`blog/${post.slug}`);
+                      }}
                       className="block w-full text-left"
                     >
                       <div className="relative aspect-[1.85/1] overflow-hidden">
@@ -735,7 +741,7 @@ export default function BlogSection({ route, onNav }: BlogSectionProps) {
                           {post.subtitle}
                         </p>
                       </div>
-                    </button>
+                    </a>
 
                     {adminToken && (
                       <div className="flex gap-2 border-t border-white/10 px-4 py-3">
