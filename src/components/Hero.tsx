@@ -13,8 +13,8 @@ export default function Hero({ onBookConsultation }: HeroProps) {
       <div className="relative z-10 mx-auto flex w-full max-w-7xl justify-center px-4 py-28 text-center sm:px-6 lg:px-8 lg:py-36">
         <motion.div initial={{ opacity: 0, y: 25 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75 }} className="max-w-4xl">
           <h1 className="font-serif text-4xl font-bold leading-[1.15] text-white drop-shadow-lg sm:text-5xl md:text-6xl lg:text-[58px]">
-            Your Trusted Legal Partner<br />
-            <span className="text-white">in Ethiopia</span>
+            Zealous legal advocacy, Backed by multidisciplinary Excellence for<br />
+            <span className="text-white">national & International clients</span>
           </h1>
           <p className="mx-auto mt-7 max-w-3xl text-lg leading-relaxed text-white/95 sm:text-xl">{BRAND_TAGLINE}</p>
           <p className="mt-2 text-sm font-medium text-white/80">{BRAND_NAME}</p>

@@ -28,8 +28,8 @@ export default function PracticeAreasSection() {
     <section id="practice-areas" className="bg-white py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-start mb-12">
-          <span className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">Practice Areas</span>
-          <h2 className="max-w-2xl text-3xl font-bold text-[#081b2d] md:text-4xl">Comprehensive Legal Expertise</h2>
+          <span className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">Areas of practice</span>
+          <h2 className="max-w-2xl text-3xl font-bold text-[#081b2d] md:text-4xl">Tax and Custumes Law</h2>
           <div className="h-1 w-16 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full mt-4" />
         </div>
 
