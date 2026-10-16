@@ -1,8 +1,9 @@
+
 services:
   - type: web
     name: yma-law-office
     runtime: node
-    plan: free
+    plan: starter
     region: frankfurt
 
     buildCommand: npm install --include=dev && npm run build
@@ -10,9 +11,17 @@ services:
 
     healthCheckPath: /api/health
 
+    disk:
+      name: yma-law-office-data
+      mountPath: /var/data
+      sizeGB: 1
+
     envVars:
       - key: NODE_ENV
         value: production
+
+      - key: BLOG_DATA_DIR
+        value: /var/data
 
       - key: BLOG_ADMIN_EMAIL
         value: ymalawoffice@blog.com
