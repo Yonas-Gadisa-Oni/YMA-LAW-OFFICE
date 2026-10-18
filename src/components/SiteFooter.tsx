@@ -1,5 +1,5 @@
-import { Envelope, MapPin, Phone, WhatsappLogo, Clock, MapTrifold } from "@phosphor-icons/react";
-import { BRAND_NAME, BRAND_SHORT, CONTACT_EMAIL_ALT, CONTACT_PHONE, OFFICE_ADDRESS, WHATSAPP_LINK } from "@/constants";
+import { Envelope, MapPin, Phone, WhatsappLogo, Clock, MapTrifold, FacebookLogo, LinkedinLogo, TwitterLogo } from "@phosphor-icons/react";
+import { BRAND_NAME, BRAND_SHORT, CONTACT_EMAIL_ALT, CONTACT_PHONE, OFFICE_ADDRESS, WHATSAPP_LINK, LINKEDIN_URL } from "@/constants";
 
 export default function SiteFooter({ onNav }: { onNav: (id: string) => void }) {
   const links = [
@@ -61,9 +61,24 @@ export default function SiteFooter({ onNav }: { onNav: (id: string) => void }) {
             </div>
           </div>
         </div>
-        <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-7 text-sm text-slate-400 md:flex-row md:items-center md:justify-between">
-          <p><span className="text-[#60a5fa]">Privacy Policy</span> | <span className="text-[#60a5fa]">Terms</span> | <span className="text-[#60a5fa]">Disclaimer</span> · © {new Date().getFullYear()} {BRAND_SHORT}. All Rights Reserved.</p>
-          <div className="flex gap-4 text-white"><a href="#" aria-label="Facebook">f</a><a href="#" aria-label="LinkedIn">in</a><a href="#" aria-label="Twitter">X</a></div>
+        <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-7 text-xs sm:text-sm text-slate-400 md:flex-row md:items-center md:justify-between">
+          <p>
+            <span className="text-[#60a5fa] hover:underline cursor-pointer">Privacy Policy</span> |{" "}
+            <span className="text-[#60a5fa] hover:underline cursor-pointer">Terms</span> |{" "}
+            <span className="text-[#60a5fa] hover:underline cursor-pointer">Disclaimer</span> · © {new Date().getFullYear()} {BRAND_SHORT}. All Rights Reserved.
+          </p>
+          <div className="flex gap-4 text-white/80">
+            <a href="#" aria-label="Facebook" className="hover:text-[#60a5fa] transition-colors"><FacebookLogo size={16} weight="fill" /></a>
+            <a href={LINKEDIN_URL || "#"} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="hover:text-[#60a5fa] transition-colors"><LinkedinLogo size={16} weight="fill" /></a>
+            <a href="#" aria-label="Twitter" className="hover:text-[#60a5fa] transition-colors"><TwitterLogo size={16} weight="fill" /></a>
+          </div>
+        </div>
+
+        <div className="mt-6 border-t border-white/5 pt-4 text-center">
+          <p className="text-sm font-semibold text-slate-300">
+            Powered &amp; Developed by{" "}
+            <span className="font-bold text-[#60a5fa]"><a href="https://portfolio-new-v2-nine.vercel.app/">Yonas G.</a></span>
+          </p>
         </div>
       </div>
     </footer>
